@@ -12,7 +12,6 @@ namespace AopTools
                 Console.WriteLine("Inject assembly failed, argument is error.");
                 return;
             }
-            System.IO.File.AppendAllText("D:\\1.log", args[0] + "\r\n");
             IAopInterceptionTask interceptionTask = new AopInterceptionTask(args[0]);
             interceptionTask.Run();
             Console.ReadKey();

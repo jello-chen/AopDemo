@@ -23,25 +23,14 @@ namespace AopInterceptionTaskLib
 
         public void Run()
         {
-            System.IO.File.AppendAllText("d:\\1.log", AopLib.Error.Format("{0}", "wojf") + "\r\n");
-            try
-            {
-                Inject();
-                System.IO.File.AppendAllText("d:\\1.log", "Inject OK" + "\r\n");
-            }
-            catch (Exception ex)
-            {
-                System.IO.File.AppendAllText("d:\\1.log", ex.Message + "\r\n");
-            }
+            Inject();
             assemblyDefinition.Write(assemblyPath);
-            System.IO.File.AppendAllText("d:\\1.log", "OK" + "\r\n");
         }
 
         private void Inject()
         {
             var modules = GetModuleCollection();
             var types = modules.SelectMany(m => GetTypeCollection(m));
-            System.IO.File.AppendAllText("d:\\1.log", types.ToList().Count.ToString()+ "\r\n");
             foreach (var type in types)
             {
                 InjectType(type);
@@ -97,7 +86,6 @@ namespace AopInterceptionTaskLib
         protected virtual void InjectMethod(TypeDefinition typeDefinition)
         {
             var methods = typeDefinition.Methods.Where(t => !t.IsSpecialName && !t.IsSetter && !t.IsGetter).ToList();
-            System.IO.File.AppendAllText("d:\\1.log", methods.Count.ToString()+ "\r\n");
             for (var i = methods.Count - 1; i >= 0; i--)
             {
                 var method = methods[i];
@@ -112,9 +100,7 @@ namespace AopInterceptionTaskLib
                                 Attribute = t,
                                 Order = t.Properties.Any(p => p.Name == "Order") ? (int)t.Properties.SingleOrDefault(p => p.Name == "Order").Argument.Value : int.MaxValue,
                             }).OrderBy(t => t.Order).Select(t => t.Attribute).ToList();
-                    System.IO.File.AppendAllText("d:\\1.log", customerAttributes.Count.ToString() + "\r\n");
                     customerAttributes.ForEach(
-
                             t => InjectMethodInternal(method, t, typeDefinition, InjectionType.Method)
                         );
 
