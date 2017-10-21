@@ -54,12 +54,12 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <UsingTask TaskName="BuildTask" AssemblyFile="F:\OpenSource\Repos\AopDemo\ClassLibrary1\bin\Debug\Aop\AopBuildTask.dll">
+  <!--<UsingTask TaskName="BuildTask" AssemblyFile="F:\OpenSource\Repos\AopDemo\ClassLibrary1\bin\Debug\Aop\AopBuildTask.dll">
   </UsingTask>
   <Target Name="BeforeBuild">
   </Target>
   <Target Name="AfterBuild">
     <BuildTask AssemblyFile="F:\OpenSource\Repos\AopDemo\ClassLibrary1\bin\Debug\ClassLibrary1.dll" TaskFile="F:\OpenSource\Repos\AopDemo\ClassLibrary1\bin\Debug\Aop\AopTools.exe">
     </BuildTask>
-  </Target>
+  </Target>-->
 </Project>

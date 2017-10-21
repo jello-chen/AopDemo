@@ -7,6 +7,8 @@ namespace AopLib
     {
         public int Order { get; set; }
 
+        public string Rule { get; set; }
+
         public virtual void AfterExecute(MethodExecutionEventArgs args)
         {
             

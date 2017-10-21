@@ -127,11 +127,11 @@ namespace AopInterceptionTaskLib
 
                     customerAttributes.ForEach(t =>
                     {
-                        if (t.InterceptionType == PropertyInterceptionType.Get && t.Property.GetMethod != null)
+                        if ((t.InterceptionType & PropertyInterceptionType.Get) == PropertyInterceptionType.Get && t.Property.GetMethod != null)
                         {
                             InjectMethodInternal(t.Property.GetMethod, t.Attribute, typeDefinition, InjectionType.Property, t.Property);
                         }
-                        else if (t.InterceptionType == PropertyInterceptionType.Set && t.Property.SetMethod != null)
+                        if ((t.InterceptionType & PropertyInterceptionType.Set) == PropertyInterceptionType.Set && t.Property.SetMethod != null)
                         {
                             InjectMethodInternal(t.Property.SetMethod, t.Attribute, typeDefinition, InjectionType.Property, t.Property);
                         }
@@ -182,11 +182,7 @@ namespace AopInterceptionTaskLib
             method.Body.Variables.Add(varExceptionStrategy);
             var vartypeArray = new VariableDefinition(module.Import(typeof(Type[])));
             method.Body.Variables.Add(vartypeArray);
-
             method.Body.InitLocals = false;
-
-
-
 
             var lastNop = new[]{  il.Create(OpCodes.Nop)            ,
                 il.Create(OpCodes.Nop)            ,
@@ -321,23 +317,20 @@ namespace AopInterceptionTaskLib
                  il.Create(OpCodes.Ldloc_S,varparams),
             });
 
-            if (method.ReturnType.FullName != "System.Void")
+            if (method.ReturnType.IsValueType)
             {
-                if (method.ReturnType.IsValueType)
-                {
 
-                    il.Append(new[] {
+                il.Append(new[] {
                         il.Create(OpCodes.Ldstr, method.ReturnType.FullName),
                     });
 
-                }
-                else
-                {
-                    il.Append(new[] {
+            }
+            else
+            {
+                il.Append(new[] {
                         il.Create(OpCodes.Ldnull ),
                     });
 
-                }
             }
 
             il.Append(new[] {
