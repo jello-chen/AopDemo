@@ -41,12 +41,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Error.cs" />
-    <Compile Include="IMethodInterceptor.cs" />
-    <Compile Include="MatchedMethodInterceptionAttribute.cs" />
-    <Compile Include="MethodExecutionEventArgs.cs" />
-    <Compile Include="MethodInterceptionAttribute.cs" />
+    <Compile Include="CT\IMethodInterceptor.cs" />
+    <Compile Include="CT\MatchedMethodInterceptionAttribute.cs" />
+    <Compile Include="CT\MethodExecutionEventArgs.cs" />
+    <Compile Include="CT\MethodInterceptionAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PropertyInterceptionAttribute.cs" />
+    <Compile Include="CT\PropertyInterceptionAttribute.cs" />
+    <Compile Include="RT\DynamicProxyGenerator.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
