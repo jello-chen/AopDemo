@@ -63,10 +63,16 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AopLib\AopLib.csproj">
+      <Project>{b04abc5c-1d21-4ab8-bc71-3109b93bf512}</Project>
+      <Name>AopLib</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="BeforeBuild">
   </Target>
   <Target Name="AfterBuild">
-	<Exec Command="F:\OpenSource\Repos\AopDemo\ConsoleApp\bin\Debug\Tool\AopTools.exe F:\OpenSource\Repos\AopDemo\ConsoleApp\bin\Debug\ClassLibrary1.dll" WorkingDirectory="F:\OpenSource\Repos\AopDemo\ConsoleApp\bin\Debug\Tool\"/>
+    <Exec Command="F:\OpenSource\Repos\AopDemo\ConsoleApp\bin\Debug\Tool\AopTools.exe F:\OpenSource\Repos\AopDemo\ConsoleApp\bin\Debug\ClassLibrary1.dll" WorkingDirectory="F:\OpenSource\Repos\AopDemo\ConsoleApp\bin\Debug\Tool\" />
   </Target>
 </Project>
